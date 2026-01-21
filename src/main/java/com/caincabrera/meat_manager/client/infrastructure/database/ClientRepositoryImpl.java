@@ -2,13 +2,11 @@ package com.caincabrera.meat_manager.client.infrastructure.database;
 
 import com.caincabrera.meat_manager.client.domain.Client;
 import com.caincabrera.meat_manager.client.domain.ClientRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class ClienteRepositoryImpl implements ClientRepository {
+public class ClientRepositoryImpl implements ClientRepository {
     @Override
     public void upsert(Client client) {
 
