@@ -1,4 +1,4 @@
-package com.caincabrera.meat_manager.client.infrastructure;
+package com.caincabrera.meat_manager.client.infrastructure.api;
 
 import com.caincabrera.meat_manager.client.domain.Client;
 import org.springframework.http.ResponseEntity;
