@@ -2,6 +2,7 @@ package com.caincabrera.meat_manager.client.infrastructure.api;
 
 
 import com.caincabrera.meat_manager.client.application.common.create.CreateClientRequest;
+import com.caincabrera.meat_manager.client.application.common.delete.DeleteClientRequest;
 import com.caincabrera.meat_manager.client.application.query.getByid.GetClientByIdRequest;
 import com.caincabrera.meat_manager.client.application.query.getByid.GetClientByIdResponse;
 import com.caincabrera.meat_manager.client.infrastructure.api.dto.ClientDto;
@@ -57,7 +58,10 @@ public class ClientController implements ClientApi {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteClient(Long id) {
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
+
+        mediator.dispatch(new DeleteClientRequest(id));
+
+        return ResponseEntity.accepted().build();
     }
 }
