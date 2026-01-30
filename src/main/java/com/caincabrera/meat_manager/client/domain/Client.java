@@ -2,12 +2,10 @@ package com.caincabrera.meat_manager.client.domain;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 
-@Data
 @Builder
-@RequiredArgsConstructor
+@Data
 public class Client {
 
     private Long id;
