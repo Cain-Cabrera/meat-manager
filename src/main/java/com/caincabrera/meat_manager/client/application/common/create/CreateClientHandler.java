@@ -1,4 +1,4 @@
-package com.caincabrera.meat_manager.client.application;
+package com.caincabrera.meat_manager.client.application.common.create;
 
 import com.caincabrera.meat_manager.client.domain.Client;
 import com.caincabrera.meat_manager.client.domain.ClientRepository;
@@ -8,27 +8,29 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ClientCreateHandler implements RequestHandler<ClientCreateRequest, Void> {
+public class CreateClientHandler implements RequestHandler<CreateClientRequest, Void> {
 
     private final ClientRepository clientRepository;
 
     @Override
-    public Void handle(ClientCreateRequest request) {
+    public Void handle(CreateClientRequest request) {
+
         Client client = Client.builder()
-                .id(1L)
-                .firstname(request.getFirstName())
-                .lastName(request.getLastname())
+                .id(request.getId())
                 .dni(request.getDni())
                 .age(request.getAge())
-                .email(request.getGmail())
+                .email(request.getEmail())
+                .firstname(request.getFirstname())
+                .lastName(request.getLastName())
                 .build();
 
         clientRepository.upsert(client);
+
         return null;
     }
 
     @Override
-    public Class<ClientCreateRequest> getRequestType() {
-        return ClientCreateRequest.class;
+    public Class<CreateClientRequest> getRequestType() {
+        return CreateClientRequest.class;
     }
 }
