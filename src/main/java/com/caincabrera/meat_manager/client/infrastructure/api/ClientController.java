@@ -1,37 +1,63 @@
 package com.caincabrera.meat_manager.client.infrastructure.api;
 
 
-import com.caincabrera.meat_manager.client.domain.Client;
+import com.caincabrera.meat_manager.client.application.common.create.CreateClientRequest;
+import com.caincabrera.meat_manager.client.application.query.getByid.GetClientByIdRequest;
+import com.caincabrera.meat_manager.client.application.query.getByid.GetClientByIdResponse;
+import com.caincabrera.meat_manager.client.infrastructure.api.dto.ClientDto;
+import com.caincabrera.meat_manager.client.infrastructure.api.mapper.ClientMapper;
+import com.caincabrera.meat_manager.common.mediator.Mediator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@RequiredArgsConstructor
 public class ClientController implements ClientApi {
 
-    @Override
-    public ResponseEntity<Void> saveClient(Client client) {
-        return null;
+    private final Mediator mediator;
+
+    private final ClientMapper clientMapper;
+
+
+    @PostMapping("/crear")
+    public ResponseEntity<ClientDto> saveClient(@RequestBody ClientDto clientDto) {
+
+        CreateClientRequest request = clientMapper.mapToCreateClientRequest(clientDto);
+
+        mediator.dispatch(request);
+
+        return ResponseEntity.ok(null);
+    }
+
+
+    @PutMapping
+    public ResponseEntity<ClientDto> updateClient(@PathVariable Long id, @RequestBody ClientDto clientDto) {
+        return ResponseEntity.noContent().build();
     }
 
     @Override
-    public ResponseEntity<Void> updateClient(Long id, Client client) {
+    public ResponseEntity<List<ClientDto>> getAllClient() {
         return null;
     }
 
-    @Override
-    public ResponseEntity<Void> getAllClient() {
-        return null;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClientDto> getByIdClient(@PathVariable Long id) {
+
+        GetClientByIdResponse response = mediator.dispatch(new GetClientByIdRequest(id));
+
+        ClientDto clientDTO = clientMapper.mapToClientDto(response.getClient());
+
+        return ResponseEntity.ok(clientDTO);
     }
 
-    @Override
-    public ResponseEntity<Void> getByidClient(Long id) {
-        return null;
-    }
 
-    @Override
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(Long id) {
-        return null;
+        return ResponseEntity.noContent().build();
     }
 }
