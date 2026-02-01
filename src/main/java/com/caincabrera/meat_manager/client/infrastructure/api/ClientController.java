@@ -3,6 +3,9 @@ package com.caincabrera.meat_manager.client.infrastructure.api;
 
 import com.caincabrera.meat_manager.client.application.common.create.CreateClientRequest;
 import com.caincabrera.meat_manager.client.application.common.delete.DeleteClientRequest;
+import com.caincabrera.meat_manager.client.application.common.update.UpdateClientRequest;
+import com.caincabrera.meat_manager.client.application.query.getAll.GetAllClientRequest;
+import com.caincabrera.meat_manager.client.application.query.getAll.GetAllClientResponse;
 import com.caincabrera.meat_manager.client.application.query.getByid.GetClientByIdRequest;
 import com.caincabrera.meat_manager.client.application.query.getByid.GetClientByIdResponse;
 import com.caincabrera.meat_manager.client.infrastructure.api.dto.ClientDto;
@@ -27,7 +30,7 @@ public class ClientController implements ClientApi {
     @PostMapping("/crear")
     public ResponseEntity<ClientDto> saveClient(@RequestBody ClientDto clientDto) {
 
-        CreateClientRequest request = clientMapper.mapToCreateClientRequest(clientDto);
+        CreateClientRequest request = clientMapper.mapToClient(clientDto);
 
         mediator.dispatch(request);
 
@@ -35,14 +38,24 @@ public class ClientController implements ClientApi {
     }
 
 
-    @PutMapping
-    public ResponseEntity<ClientDto> updateClient(@PathVariable Long id, @RequestBody ClientDto clientDto) {
-        return ResponseEntity.noContent().build();
+    @PutMapping("/upsert")
+    public ResponseEntity<ClientDto> updateClient(@RequestBody ClientDto clientDto) {
+
+        UpdateClientRequest request = clientMapper.mapToClientUpdate(clientDto);
+
+        mediator.dispatch(request);
+
+        return ResponseEntity.ok().build();
     }
 
-    @Override
+    @GetMapping
     public ResponseEntity<List<ClientDto>> getAllClient() {
-        return null;
+
+        GetAllClientResponse response = mediator.dispatch(new GetAllClientRequest());
+
+        List<ClientDto> clients = response.getClients().stream().map(clientMapper::mapToClientDto).toList();
+
+        return ResponseEntity.ok(clients);
     }
 
 
