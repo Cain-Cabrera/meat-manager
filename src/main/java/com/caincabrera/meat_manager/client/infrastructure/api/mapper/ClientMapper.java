@@ -1,6 +1,7 @@
 package com.caincabrera.meat_manager.client.infrastructure.api.mapper;
 
 import com.caincabrera.meat_manager.client.application.common.create.CreateClientRequest;
+import com.caincabrera.meat_manager.client.application.common.update.UpdateClientRequest;
 import com.caincabrera.meat_manager.client.domain.Client;
 import com.caincabrera.meat_manager.client.infrastructure.api.dto.ClientDto;
 import org.mapstruct.Mapper;
@@ -11,8 +12,9 @@ import org.mapstruct.ReportingPolicy;
 public interface ClientMapper {
 
 
-    CreateClientRequest mapToCreateClientRequest(ClientDto clientDto);
+    CreateClientRequest mapToClient(ClientDto clientDto);
 
+    UpdateClientRequest mapToClientUpdate(ClientDto clientDto);
 
     ClientDto mapToClientDto(Client client);
 }
