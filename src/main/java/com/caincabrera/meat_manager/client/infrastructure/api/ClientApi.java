@@ -11,7 +11,7 @@ public interface ClientApi {
 
     ResponseEntity<ClientDto> saveClient(@RequestBody ClientDto clientDto);
 
-    ResponseEntity<ClientDto> updateClient(@PathVariable Long id, @RequestBody ClientDto clientDto);
+    ResponseEntity<ClientDto> updateClient(@RequestBody ClientDto clientDto);
 
     ResponseEntity<List<ClientDto>> getAllClient();
 
