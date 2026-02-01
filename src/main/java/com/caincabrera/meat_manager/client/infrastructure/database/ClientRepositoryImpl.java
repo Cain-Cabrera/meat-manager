@@ -22,15 +22,15 @@ public class ClientRepositoryImpl implements ClientRepository {
     @Override
     public void upsert(Client client) {
         ClientEntity clientEntity = clientEntityMapper.mapToEntity(client);
+        clients.removeIf(p -> p.getId().equals(client.getId()));
         clients.add(clientEntity);
     }
 
     @Override
     public List<Client> findAll() {
         return clients.stream()
-                .findFirst()
                 .map(clientEntityMapper::mapToClient)
-                .stream().toList();
+                .toList();
     }
 
     @Override
