@@ -1,4 +1,6 @@
-package com.caincabrera.meat_manager.client.domain;
+package com.caincabrera.meat_manager.client.domain.port;
+
+import com.caincabrera.meat_manager.client.domain.entity.Client;
 
 import java.util.List;
 import java.util.Optional;

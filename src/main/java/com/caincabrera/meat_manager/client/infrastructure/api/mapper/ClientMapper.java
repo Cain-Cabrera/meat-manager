@@ -2,7 +2,7 @@ package com.caincabrera.meat_manager.client.infrastructure.api.mapper;
 
 import com.caincabrera.meat_manager.client.application.common.create.CreateClientRequest;
 import com.caincabrera.meat_manager.client.application.common.update.UpdateClientRequest;
-import com.caincabrera.meat_manager.client.domain.Client;
+import com.caincabrera.meat_manager.client.domain.entity.Client;
 import com.caincabrera.meat_manager.client.infrastructure.api.dto.ClientDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

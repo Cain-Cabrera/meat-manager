@@ -1,6 +1,6 @@
 package com.caincabrera.meat_manager.client.infrastructure.database.mapper;
 
-import com.caincabrera.meat_manager.client.domain.Client;
+import com.caincabrera.meat_manager.client.domain.entity.Client;
 import com.caincabrera.meat_manager.client.infrastructure.database.entity.ClientEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

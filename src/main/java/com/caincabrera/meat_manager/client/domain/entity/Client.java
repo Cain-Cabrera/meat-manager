@@ -1,4 +1,4 @@
-package com.caincabrera.meat_manager.client.domain;
+package com.caincabrera.meat_manager.client.domain.entity;
 
 import lombok.Builder;
 import lombok.Data;

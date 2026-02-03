@@ -1,6 +1,6 @@
 package com.caincabrera.meat_manager.client.application.common.delete;
 
-import com.caincabrera.meat_manager.client.domain.ClientRepository;
+import com.caincabrera.meat_manager.client.domain.port.ClientRepository;
 import com.caincabrera.meat_manager.common.mediator.RequestHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

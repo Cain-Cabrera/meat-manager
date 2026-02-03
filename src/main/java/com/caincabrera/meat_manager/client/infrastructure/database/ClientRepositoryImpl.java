@@ -1,7 +1,7 @@
 package com.caincabrera.meat_manager.client.infrastructure.database;
 
-import com.caincabrera.meat_manager.client.domain.Client;
-import com.caincabrera.meat_manager.client.domain.ClientRepository;
+import com.caincabrera.meat_manager.client.domain.entity.Client;
+import com.caincabrera.meat_manager.client.domain.port.ClientRepository;
 import com.caincabrera.meat_manager.client.infrastructure.database.entity.ClientEntity;
 import com.caincabrera.meat_manager.client.infrastructure.database.mapper.ClientEntityMapper;
 import lombok.RequiredArgsConstructor;
