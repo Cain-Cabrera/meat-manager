@@ -11,6 +11,7 @@ import com.caincabrera.meat_manager.client.application.query.getByid.GetClientBy
 import com.caincabrera.meat_manager.client.infrastructure.api.dto.ClientDto;
 import com.caincabrera.meat_manager.client.infrastructure.api.mapper.ClientMapper;
 import com.caincabrera.meat_manager.common.mediator.Mediator;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class ClientController implements ClientApi {
 
 
     @PostMapping("/crear")
-    public ResponseEntity<ClientDto> saveClient(@RequestBody ClientDto clientDto) {
+    public ResponseEntity<ClientDto> saveClient(@RequestBody @Valid ClientDto clientDto) {
 
         CreateClientRequest request = clientMapper.mapToClient(clientDto);
 
@@ -39,7 +40,7 @@ public class ClientController implements ClientApi {
 
 
     @PutMapping("/upsert")
-    public ResponseEntity<ClientDto> updateClient(@RequestBody ClientDto clientDto) {
+    public ResponseEntity<ClientDto> updateClient(@RequestBody @Valid ClientDto clientDto) {
 
         UpdateClientRequest request = clientMapper.mapToClientUpdate(clientDto);
 
