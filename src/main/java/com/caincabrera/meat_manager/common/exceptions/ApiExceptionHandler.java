@@ -32,7 +32,7 @@ public class ApiExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ClientNotFoundException.class)
-    public ErrorMessage notFound(HttpServletRequest request, ClientNotFoundException exception) {
+    public ErrorMessage notFound(HttpServletRequest request, Exception exception) {
         return new ErrorMessage(exception.getMessage(), exception.getClass().getSimpleName(), request.getRequestURI());
     }
 

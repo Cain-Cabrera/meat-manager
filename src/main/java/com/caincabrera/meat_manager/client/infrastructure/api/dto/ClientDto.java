@@ -27,7 +27,6 @@ public class ClientDto {
     @Email(message = "invalid email format")
     private String email;
 
-    @NotBlank(message = "age is required")
     @Positive
     @Min(value = 14, message = "minimum age 14 years old")
     private int age;
