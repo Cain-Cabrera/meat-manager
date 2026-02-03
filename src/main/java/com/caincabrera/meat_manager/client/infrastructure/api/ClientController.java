@@ -28,7 +28,7 @@ public class ClientController implements ClientApi {
     private final ClientMapper clientMapper;
 
 
-    @PostMapping("/crear")
+    @PostMapping()
     public ResponseEntity<ClientDto> saveClient(@RequestBody @Valid ClientDto clientDto) {
 
         CreateClientRequest request = clientMapper.mapToClient(clientDto);
@@ -39,7 +39,7 @@ public class ClientController implements ClientApi {
     }
 
 
-    @PutMapping("/upsert")
+    @PutMapping()
     public ResponseEntity<ClientDto> updateClient(@RequestBody @Valid ClientDto clientDto) {
 
         UpdateClientRequest request = clientMapper.mapToClientUpdate(clientDto);
@@ -49,7 +49,7 @@ public class ClientController implements ClientApi {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<ClientDto>> getAllClient() {
 
         GetAllClientResponse response = mediator.dispatch(new GetAllClientRequest());
