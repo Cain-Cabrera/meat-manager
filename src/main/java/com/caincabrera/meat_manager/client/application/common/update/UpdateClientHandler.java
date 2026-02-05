@@ -4,16 +4,20 @@ import com.caincabrera.meat_manager.client.domain.entity.Client;
 import com.caincabrera.meat_manager.client.domain.port.ClientRepository;
 import com.caincabrera.meat_manager.common.mediator.RequestHandler;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class UpdateClientHandler implements RequestHandler<UpdateClientRequest, Void> {
 
     private final ClientRepository clientRepository;
 
     @Override
     public Void handle(UpdateClientRequest request) {
+
+        log.info("updating client whit {} id", request.getId());
 
         Client client = Client.builder()
                 .id(request.getId())
@@ -25,6 +29,8 @@ public class UpdateClientHandler implements RequestHandler<UpdateClientRequest, 
                 .build();
 
         clientRepository.upsert(client);
+
+        log.info("created client whit {} id", request.getId());
 
         return null;
     }
