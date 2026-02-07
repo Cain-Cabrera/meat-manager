@@ -1,3 +1,6 @@
 spring:
   application:
     name: meat-manager
+
+  cache:
+    type: simple
