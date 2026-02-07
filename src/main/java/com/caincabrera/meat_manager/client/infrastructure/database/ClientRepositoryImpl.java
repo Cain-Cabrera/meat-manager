@@ -5,6 +5,8 @@ import com.caincabrera.meat_manager.client.domain.port.ClientRepository;
 import com.caincabrera.meat_manager.client.infrastructure.database.entity.ClientEntity;
 import com.caincabrera.meat_manager.client.infrastructure.database.mapper.ClientEntityMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class ClientRepositoryImpl implements ClientRepository {
         clients.add(clientEntity);
     }
 
+    @Cacheable(value = "clients", key = "'all'")
     @Override
     public List<Client> findAll() {
         return clients.stream()
@@ -33,11 +36,13 @@ public class ClientRepositoryImpl implements ClientRepository {
                 .toList();
     }
 
+    @CacheEvict(value = "client", key = "#id")
     @Override
     public void deleteClient(Long id) {
         clients.removeIf(p -> p.getId().equals(id));
     }
 
+    @CacheEvict(value = "client", key = "#id")
     @Override
     public Optional<Client> findById(Long id) {
         return clients.stream()
