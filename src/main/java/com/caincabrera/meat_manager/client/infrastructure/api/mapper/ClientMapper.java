@@ -17,4 +17,6 @@ public interface ClientMapper {
     UpdateClientRequest mapToClientUpdate(ClientDto clientDto);
 
     ClientDto mapToClientDto(Client client);
+
+    ClientDto mapToClientDtoToRequest(CreateClientRequest request);
 }
