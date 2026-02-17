@@ -38,9 +38,11 @@ public class ClientController implements ClientApi {
 
         mediator.dispatch(request);
 
+        ClientDto client = clientMapper.mapToClientDtoToRequest(request);
+
         log.info("saved client whit id {}", clientDto.getId());
 
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(client);
     }
 
 
