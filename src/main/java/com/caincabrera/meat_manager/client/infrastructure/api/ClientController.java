@@ -11,6 +11,8 @@ import com.caincabrera.meat_manager.client.application.query.getByid.GetClientBy
 import com.caincabrera.meat_manager.client.infrastructure.api.dto.ClientDto;
 import com.caincabrera.meat_manager.client.infrastructure.api.mapper.ClientMapper;
 import com.caincabrera.meat_manager.common.mediator.Mediator;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
+@Tag(name = "Client API methods")
 @Slf4j
 public class ClientController implements ClientApi {
 
@@ -29,6 +32,7 @@ public class ClientController implements ClientApi {
 
     private final ClientMapper clientMapper;
 
+    @Operation(summary = "Save client", description = "Register a new client")
     @PostMapping()
     public ResponseEntity<ClientDto> saveClient(@RequestBody @Valid ClientDto clientDto) {
 
@@ -45,7 +49,7 @@ public class ClientController implements ClientApi {
         return ResponseEntity.ok(client);
     }
 
-
+    @Operation(summary = "Update client", description = "Update client exist")
     @PutMapping()
     public ResponseEntity<ClientDto> updateClient(@RequestBody @Valid ClientDto clientDto) {
 
@@ -60,6 +64,7 @@ public class ClientController implements ClientApi {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "Get all client", description = "Get all clients")
     @GetMapping()
     public ResponseEntity<List<ClientDto>> getAllClient() {
 
@@ -74,7 +79,7 @@ public class ClientController implements ClientApi {
         return ResponseEntity.ok(clients);
     }
 
-
+    @Operation(summary = "Get by Id client", description = "Get a client by id")
     @GetMapping("/{id}")
     public ResponseEntity<ClientDto> getByIdClient(@PathVariable Long id) {
 
@@ -89,7 +94,7 @@ public class ClientController implements ClientApi {
         return ResponseEntity.ok(clientDTO);
     }
 
-
+    @Operation(summary = "Delete client if id exist", description = "Delete a client by id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
 
