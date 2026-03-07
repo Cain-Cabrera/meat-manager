@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: meat-manager
+  profiles:
+    active: test

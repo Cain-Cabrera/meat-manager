@@ -1,0 +1,23 @@
+spring:
+  cache:
+    type: simple
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  endpoint:
+    health:
+      show-details: always
+
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server:
+          requests: true
