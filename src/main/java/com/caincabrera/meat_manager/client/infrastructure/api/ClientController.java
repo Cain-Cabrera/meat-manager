@@ -2,12 +2,15 @@ package com.caincabrera.meat_manager.client.infrastructure.api;
 
 
 import com.caincabrera.meat_manager.client.application.common.create.CreateClientRequest;
+import com.caincabrera.meat_manager.client.application.common.create.CreateClientResponse;
 import com.caincabrera.meat_manager.client.application.common.delete.DeleteClientRequest;
 import com.caincabrera.meat_manager.client.application.common.update.UpdateClientRequest;
+import com.caincabrera.meat_manager.client.application.common.update.UpdateClientResponse;
 import com.caincabrera.meat_manager.client.application.query.getAll.GetAllClientRequest;
 import com.caincabrera.meat_manager.client.application.query.getAll.GetAllClientResponse;
 import com.caincabrera.meat_manager.client.application.query.getByid.GetClientByIdRequest;
 import com.caincabrera.meat_manager.client.application.query.getByid.GetClientByIdResponse;
+import com.caincabrera.meat_manager.client.domain.entity.Client;
 import com.caincabrera.meat_manager.client.infrastructure.api.dto.ClientDto;
 import com.caincabrera.meat_manager.client.infrastructure.api.mapper.ClientMapper;
 import com.caincabrera.meat_manager.common.mediator.Mediator;
@@ -19,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -36,30 +40,32 @@ public class ClientController implements ClientApi {
     @PostMapping()
     public ResponseEntity<ClientDto> saveClient(@RequestBody @Valid ClientDto clientDto) {
 
-        log.info("saving client whit id {}", clientDto.getId());
+        log.info("saving client ");
 
-        CreateClientRequest request = clientMapper.mapToClient(clientDto);
+        CreateClientRequest request = clientMapper.mapToClientDtoToCreateClientRequest(clientDto);
 
-        mediator.dispatch(request);
+        CreateClientResponse response = mediator.dispatch(request);
 
-        ClientDto client = clientMapper.mapToClientDtoToRequest(request);
+        Client clientResponse = response.getClient();
 
-        log.info("saved client whit id {}", clientDto.getId());
+        log.info("saved client whit id {}", clientResponse.getId());
 
-        return ResponseEntity.ok(client);
+        return ResponseEntity.created(URI.create("/api/v1".concat(clientResponse.getId().toString()))).build();
     }
 
     @Operation(summary = "Update client", description = "Update client exist")
     @PutMapping()
     public ResponseEntity<ClientDto> updateClient(@RequestBody @Valid ClientDto clientDto) {
 
-        log.info("updating client whit id {}", clientDto.getId());
+        log.info("updating client");
 
         UpdateClientRequest request = clientMapper.mapToClientUpdate(clientDto);
 
-        mediator.dispatch(request);
+        UpdateClientResponse response = mediator.dispatch(request);
 
-        log.info("updated client whit id {}", clientDto.getId());
+        Client client = response.getClient();
+
+        log.info("updated client whit id {}", client.getId());
 
         return ResponseEntity.ok().build();
     }
