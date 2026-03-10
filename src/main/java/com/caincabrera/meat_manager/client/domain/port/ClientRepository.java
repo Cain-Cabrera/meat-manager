@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ClientRepository {
 
-    void upsert(Client client);
+    Client upsert(Client client);
 
     List<Client> findAll();
 
