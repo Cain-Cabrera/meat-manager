@@ -6,9 +6,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CreateClientRequest implements Request<Void> {
+public class CreateClientRequest implements Request<CreateClientResponse> {
 
-    private Long id;
     private String firstname;
     private String lastName;
     private String dni;

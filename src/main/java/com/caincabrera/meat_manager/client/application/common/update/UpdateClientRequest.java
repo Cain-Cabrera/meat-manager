@@ -6,9 +6,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UpdateClientRequest implements Request<Void> {
+public class UpdateClientRequest implements Request<UpdateClientResponse> {
 
-    private Long id;
     private String firstname;
     private String lastName;
     private String dni;
