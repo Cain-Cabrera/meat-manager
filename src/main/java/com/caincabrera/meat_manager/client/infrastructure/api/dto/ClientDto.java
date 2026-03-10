@@ -12,8 +12,6 @@ import org.hibernate.validator.constraints.Length;
 @Data
 public class ClientDto {
 
-    private Long id;
-
     @NotBlank(message = "first name is required")
     private String firstname;
 
