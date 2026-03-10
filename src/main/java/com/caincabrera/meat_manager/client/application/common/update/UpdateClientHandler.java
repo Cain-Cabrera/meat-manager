@@ -10,17 +10,16 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class UpdateClientHandler implements RequestHandler<UpdateClientRequest, Void> {
+public class UpdateClientHandler implements RequestHandler<UpdateClientRequest, UpdateClientResponse> {
 
     private final ClientRepository clientRepository;
 
     @Override
-    public Void handle(UpdateClientRequest request) {
+    public UpdateClientResponse handle(UpdateClientRequest request) {
 
-        log.info("updating client whit {} id", request.getId());
+        log.info("updating client ");
 
         Client client = Client.builder()
-                .id(request.getId())
                 .dni(request.getDni())
                 .age(request.getAge())
                 .email(request.getEmail())
@@ -28,11 +27,11 @@ public class UpdateClientHandler implements RequestHandler<UpdateClientRequest, 
                 .lastName(request.getLastName())
                 .build();
 
-        clientRepository.upsert(client);
+        Client clientUpdate = clientRepository.upsert(client);
 
-        log.info("created client whit {} id", request.getId());
+        log.info("created client whit {} id", clientUpdate.getId());
 
-        return null;
+        return new UpdateClientResponse(client);
     }
 
     @Override

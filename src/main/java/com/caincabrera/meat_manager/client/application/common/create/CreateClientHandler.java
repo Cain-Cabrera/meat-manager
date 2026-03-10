@@ -10,17 +10,16 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class CreateClientHandler implements RequestHandler<CreateClientRequest, Void> {
+public class CreateClientHandler implements RequestHandler<CreateClientRequest, CreateClientResponse> {
 
     private final ClientRepository clientRepository;
 
     @Override
-    public Void handle(CreateClientRequest request) {
+    public CreateClientResponse handle(CreateClientRequest request) {
 
-        log.info("creating client whit {} id", request.getId());
+        log.info("creating client");
 
         Client client = Client.builder()
-                .id(request.getId())
                 .dni(request.getDni())
                 .age(request.getAge())
                 .email(request.getEmail())
@@ -28,11 +27,11 @@ public class CreateClientHandler implements RequestHandler<CreateClientRequest, 
                 .lastName(request.getLastName())
                 .build();
 
-        clientRepository.upsert(client);
+        Client clientUpsert = clientRepository.upsert(client);
 
-        log.info("created client whit id {}", request.getId());
+        log.info("created client whit id {}", clientUpsert.getId());
 
-        return null;
+        return new CreateClientResponse(clientUpsert);
     }
 
     @Override
