@@ -12,7 +12,7 @@ import org.mapstruct.ReportingPolicy;
 public interface ClientMapper {
 
 
-    CreateClientRequest mapToClient(ClientDto clientDto);
+    CreateClientRequest mapToClientDtoToCreateClientRequest(ClientDto clientDto);
 
     UpdateClientRequest mapToClientUpdate(ClientDto clientDto);
 

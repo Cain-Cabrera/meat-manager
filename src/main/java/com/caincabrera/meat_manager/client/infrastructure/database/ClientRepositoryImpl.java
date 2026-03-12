@@ -4,12 +4,12 @@ import com.caincabrera.meat_manager.client.domain.entity.Client;
 import com.caincabrera.meat_manager.client.domain.port.ClientRepository;
 import com.caincabrera.meat_manager.client.infrastructure.database.entity.ClientEntity;
 import com.caincabrera.meat_manager.client.infrastructure.database.mapper.ClientEntityMapper;
+import com.caincabrera.meat_manager.client.infrastructure.database.repository.QueryClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,37 +17,33 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ClientRepositoryImpl implements ClientRepository {
 
-    private final List<ClientEntity> clients = new ArrayList<>();
+    private final QueryClientRepository repository;
 
     private final ClientEntityMapper clientEntityMapper;
 
     @Override
-    public void upsert(Client client) {
+    public Client upsert(Client client) {
         ClientEntity clientEntity = clientEntityMapper.mapToEntity(client);
-        clients.removeIf(p -> p.getId().equals(client.getId()));
-        clients.add(clientEntity);
+        ClientEntity clientEntitySaved = repository.save(clientEntity);
+
+        return clientEntityMapper.mapToClient(clientEntitySaved);
     }
 
     @Cacheable(value = "clients", key = "'all'")
     @Override
     public List<Client> findAll() {
-        return clients.stream()
-                .map(clientEntityMapper::mapToClient)
-                .toList();
+        return repository.findAll().stream().map(clientEntityMapper::mapToClient).toList();
     }
 
     @CacheEvict(value = "client", key = "#id")
     @Override
     public void deleteClient(Long id) {
-        clients.removeIf(p -> p.getId().equals(id));
+        repository.deleteById(id);
     }
 
     @CacheEvict(value = "client", key = "#id")
     @Override
     public Optional<Client> findById(Long id) {
-        return clients.stream()
-                .filter(p -> p.getId().equals(id))
-                .findFirst()
-                .map(clientEntityMapper::mapToClient);
+        return repository.findById(id).map(clientEntityMapper::mapToClient);
     }
 }
