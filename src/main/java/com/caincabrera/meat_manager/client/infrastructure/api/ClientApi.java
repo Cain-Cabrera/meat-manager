@@ -19,4 +19,5 @@ public interface ClientApi {
 
     ResponseEntity<Void> deleteClient(@PathVariable Long id);
 
+    ResponseEntity<ClientDto> getClientByEmail(@PathVariable String email);
 }
