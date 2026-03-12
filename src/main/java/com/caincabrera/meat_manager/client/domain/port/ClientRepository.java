@@ -14,4 +14,7 @@ public interface ClientRepository {
     void deleteClient(Long id);
 
     Optional<Client> findById(Long id);
+
+    Optional<Client> findClientByEmail(String email);
+
 }
