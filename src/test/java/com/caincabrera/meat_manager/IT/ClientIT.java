@@ -70,7 +70,6 @@ public class ClientIT {
     public void saveClient() throws Exception {
 
         ClientDto client = ClientDto.builder()
-                .id(1L)
                 .firstname("Cain")
                 .lastName("Cabrera")
                 .email("test@gmail.com")

@@ -30,7 +30,7 @@ class CreateClientHandlerTest {
     @Test
     public void ShouldCreateClient() {
 
-        CreateClientRequest request = new CreateClientRequest(1L, "Cain"
+        CreateClientRequest request = new CreateClientRequest("Cain"
                 , "Cabrera", "44200300", "cain@gmail.com", 24);
 
         doNothing().when(clientRepository).upsert(any(Client.class));
