@@ -1,14 +1,21 @@
 spring:
   cache:
     type: simple
+
   datasource:
     url: jdbc:postgresql://localhost:5432/spring
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enable: true
+    location: classpath:db/migration
+    baseline-on-migrate: true
+
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     naming:
       physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
@@ -24,11 +31,9 @@ management:
     web:
       exposure:
         include: "*"
-
   endpoint:
     health:
       show-details: always
-
   metrics:
     distribution:
       percentiles-histogram:

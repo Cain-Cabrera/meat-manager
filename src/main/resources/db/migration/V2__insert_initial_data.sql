@@ -1,0 +1,16 @@
+INSERT INTO client (firstname, last_name, dni, email, age)
+VALUES ('Juan', 'García', '12345678', 'juan.garcia@email.com', 28),
+       ('María', 'López', '23456789', 'maria.lopez@email.com', 34),
+       ('Carlos', 'Martínez', '34567890', 'carlos.martinez@email.com', 22),
+       ('Ana', 'Rodríguez', '45678901', 'ana.rodriguez@email.com', 45),
+       ('Lucas', 'Fernández', '56789012', 'lucas.fernandez@email.com', 19),
+       ('Valentina', 'Gómez', '67890123', 'valentina.gomez@email.com', 31),
+       ('Diego', 'Pérez', '78901234', 'diego.perez@email.com', 27),
+       ('Camila', 'Sánchez', '89012345', 'camila.sanchez@email.com', 38),
+       ('Martín', 'Torres', '90123456', 'martin.torres@email.com', 24),
+       ('Lucía', 'Ramírez', '01234567', 'lucia.ramirez@email.com', 52),
+       ('Facundo', 'Herrera', '11223344', 'facundo.herrera@email.com', 17),
+       ('Florencia', 'Medina', '22334455', 'florencia.medina@email.com', 29),
+       ('Nicolás', 'Acosta', '33445566', 'nicolas.acosta@email.com', 41),
+       ('Agustina', 'Vargas', '44556677', 'agustina.vargas@email.com', 16),
+       ('Sebastián', 'Castro', '55667788', 'sebastian.castro@email.com', 33);
