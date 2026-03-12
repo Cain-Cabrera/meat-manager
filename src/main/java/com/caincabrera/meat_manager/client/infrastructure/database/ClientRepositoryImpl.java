@@ -46,4 +46,9 @@ public class ClientRepositoryImpl implements ClientRepository {
     public Optional<Client> findById(Long id) {
         return repository.findById(id).map(clientEntityMapper::mapToClient);
     }
+
+    @Override
+    public Optional<Client> findClientByEmail(String email) {
+        return repository.findByEmail(email).map(clientEntityMapper::mapToClient);
+    }
 }
