@@ -6,6 +6,8 @@ import com.caincabrera.meat_manager.client.application.common.create.CreateClien
 import com.caincabrera.meat_manager.client.application.common.delete.DeleteClientRequest;
 import com.caincabrera.meat_manager.client.application.common.update.UpdateClientRequest;
 import com.caincabrera.meat_manager.client.application.common.update.UpdateClientResponse;
+import com.caincabrera.meat_manager.client.application.query.findClientByEmail.GetClientByEmailRequest;
+import com.caincabrera.meat_manager.client.application.query.findClientByEmail.GetClientByEmailResponse;
 import com.caincabrera.meat_manager.client.application.query.getAll.GetAllClientRequest;
 import com.caincabrera.meat_manager.client.application.query.getAll.GetAllClientResponse;
 import com.caincabrera.meat_manager.client.application.query.getByid.GetClientByIdRequest;
@@ -111,5 +113,20 @@ public class ClientController implements ClientApi {
         log.info("deleted client whit id {}", id);
 
         return ResponseEntity.accepted().build();
+    }
+
+    @Operation(summary = "Get client by Email", description = "Get a client by email")
+    @GetMapping("/email/{email}")
+    public ResponseEntity<ClientDto> getClientByEmail(@PathVariable String email) {
+
+        log.info("getting client by email {}", email);
+
+        GetClientByEmailResponse response = mediator.dispatch(new GetClientByEmailRequest(email));
+
+        ClientDto clientDTO = clientMapper.mapToClientDto(response.getClient());
+
+        log.info("found client by email {}", email);
+
+        return ResponseEntity.ok(clientDTO);
     }
 }
